@@ -22,6 +22,7 @@ if($have_vstudio -eq 0){
 
 cd Scripts
 pip freeze > requirements.txt
+pip install -r pre-requirements.txt
 pip install -r requirements.txt
 
 cd ..
