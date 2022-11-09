@@ -1,11 +1,5 @@
 # todo
-#download mission planner
-#download visual studio code and build tools c++
 #download needed python packages
-#download vscode  if theres not
-#run sitl
-#open misionplanner
-#open vscode with a simple script
 #download pymavlink or whatever
 
 $path = Get-Location
@@ -19,7 +13,35 @@ if (!(Test-Path "$path\ardupilot")){
   git clone https://github.com/ArduPilot/ardupilot.git
 }
 
+$have_vscode = Read-Host "Do u have vscode? 0 for no"
+if($have_vstudio -eq 0){
+  Write-Host "Download It From Here:"
+  Write-Host "https://code.visualstudio.com/download#"
+  Read-Host "Continue?"
+}
+
 cd Installers
+$have_vstudio = Read-Host "Do u have visual studio community? 0 for no, 1 for yes"
+
+if($have_vstudio -eq 1){
+  Write-Host "Please Download C++ Build Tools"
+  Invoke-WebRequest "https://aka.ms/vs/17/release/vs_BuildTools.exe" -OutFile "$path\Installers\vs_BuildTools.exe"
+  .\"vs_BuildTools.exe"
+}
+if($have_vstudio -eq 0){
+  Write-Host "Download It From Here:"
+  Write-Host "https://visualstudio.microsoft.com/downloads/"
+  Write-Host "Please Rerun This File And Choose Yes"
+  Exit
+}
+
+if (!(Test-Path "$path\Installers\MissionPlanner-latest.msi")){
+  New-Item -Path $path -Name "missionplanner" -ItemType "directory"
+  Write-Host "Please Download It Under $path/missionplanner/"
+  Invoke-WebRequest "https://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi" -OutFile "$path\Installers\MissionPlanner-latest.msi"
+  .\"MissionPlanner-latest.msi"
+}
+
 if (!(Test-Path "$path\Installers\python-3.11.0-amd64.exe")){
   Invoke-WebRequest "https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe" -OutFile "$path\Installers\python-3.11.0-amd64.exe"
   .\"python-3.11.0-amd64.exe"
@@ -65,8 +87,25 @@ if (!(Test-Path "$path\Installers\MAVProxySetup-latest.exe")){
   Write-Host "Finished. Press any key to continue ..."
   $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 }
+
+cd ..
+cd ardupilot
+git submodule update --init --recursive
+
 Read-Host "Continue to Open Simulator?"
-C:\cygwin\bin\bash -c "command here"
-Write-Host "If Nothing Happened or Error, please open cygwin terminal and write:"
-Write-Host "cd /cygdrive/c"
-Write-Host "cd /cygdrive/c"
+Write-Host "Please open cygwin terminal and write:"
+$drive = Read-Host "Desktop in C or D or E disk?, or Write The Name of disk"
+Write-Host "cd /cygdrive/$drive/$env:UserName/$path/ardupilot"
+Write-Host "./Tools/autotest/sim_vehicle.py --map --console"
+
+Read-Host "Continue With Ground Station?"
+cd ..
+cd missionplanner
+.\"MissionPlanner.exe"
+
+Read-Host "Please Connect Ground Station With SITL and Continue"
+
+Read-Host "Continue and Open Python Script?"
+cd ..
+cd Scripts
+code .
