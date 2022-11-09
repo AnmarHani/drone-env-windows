@@ -45,10 +45,9 @@ if (!(Test-Path "$path\Installers\python-3.11.0-amd64.exe")){
   $downloads_counter++
 }
 
-cd ..
-
 pip install "./lxml-4.9.0-cp311-cp311-win_amd64.whl"
 
+cd ..
 cd Scripts
 pip freeze > requirements.txt
 pip install -r pre-requirements.txt
