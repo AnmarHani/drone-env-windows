@@ -47,7 +47,7 @@ if (!(Test-Path "$path\Installers\python-3.11.0-amd64.exe")){
   .\"python-3.11.0-amd64.exe"
   $downloads_counter++
 }
-
+Write-Host "Downloading Python Packages...."
 pip install "./lxml-4.9.0-cp311-cp311-win_amd64.whl"
 pip install lxml
 pip install pexpect
@@ -63,6 +63,7 @@ cd ..
 cd Installers
 
 if (!(Test-Path "$path\Installers\Git-2.38.1-64-bit.exe")){
+  Write-Host "Downloading Git...."
   Invoke-WebRequest "https://github.com/git-for-windows/git/releases/download/v2.38.1.windows.1/Git-2.38.1-64-bit.exe" -OutFile "$path\Installers\Git-2.38.1-64-bit.exe"
   .\"Git-2.38.1-64-bit.exe"
   $downloads_counter++
@@ -74,7 +75,7 @@ if($downloads_counter -eq 2){
 }
 
 if (!(Test-Path "$path\Installers\MAVProxySetup-latest.exe")){
-  Write-Output "Starting Downloads"
+  Write-Output "Starting Downloads, WARNING: PLEASE DONT CANCEL!"
 
   Write-Output "Downloading MAVProxy (1/7)"
   Start-BitsTransfer -Source "https://firmware.ardupilot.org/Tools/MAVProxy/MAVProxySetup-latest.exe" -Destination "$PSScriptRoot\MAVProxySetup-latest.exe"
@@ -103,13 +104,14 @@ if (!(Test-Path "$path\Installers\MAVProxySetup-latest.exe")){
   $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 }
 
+Write-Host "Downloading Ardupilot Packages..."
 cd ..
 cd ardupilot
 git submodule update --init --recursive
 
 Read-Host "Continue to Open Simulator?"
 Write-Host "Please open cygwin terminal and write:"
-$drive = Read-Host "Desktop in C or D or E disk?, or Write The Name of disk"
+$drive = Read-Host "$path in C or D or E disk?, or Write The Name of disk"
 Write-Host "cd /cygdrive/$drive/$env:UserName/$path/ardupilot"
 Write-Host "./Tools/autotest/sim_vehicle.py --map --console"
 
