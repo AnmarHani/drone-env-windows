@@ -20,7 +20,11 @@ if($have_vstudio -eq 0){
   Read-Host "Continue?"
 }
 
-pip install -r "$path/Scripts/requirements.txt"
+cd Scripts
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+cd ..
 
 cd Installers
 $have_vstudio = Read-Host "Do u have visual studio community? 0 for no, 1 for yes"
