@@ -6,10 +6,11 @@ if (!(Test-Path "$path\Installers")){
 }
 
 if (!(Test-Path "$path\ardupilot")){
+  Write-Host "Downloading Ardupilot...."
   git clone https://github.com/ArduPilot/ardupilot.git
 }
 
-$have_vscode = Read-Host "Do u have vscode? 0 for no"
+$have_vscode = Read-Host "Do u have vscode? 0 for no, Enter To Skip.."
 if($have_vstudio -eq 0){
   Write-Host "Download It From Here:"
   Write-Host "https://code.visualstudio.com/download#"
@@ -18,10 +19,11 @@ if($have_vstudio -eq 0){
 
 
 cd Installers
-$have_vstudio = Read-Host "Do u have visual studio community? 0 for no, 1 for yes"
+$have_vstudio = Read-Host "Do u have visual studio community? 0 for no, 1 for yes, Enter To Skip.."
 
 if($have_vstudio -eq 1){
   Write-Host "Please Download C++ Build Tools"
+  Write-Host "Opening Installer..."
   Invoke-WebRequest "https://aka.ms/vs/17/release/vs_BuildTools.exe" -OutFile "$path\Installers\vs_BuildTools.exe"
   .\"vs_BuildTools.exe"
 }
