@@ -74,7 +74,8 @@ if($downloads_counter -eq 2){
   Restart-Computer
 }
 
-if (!(Test-Path "$path\Installers\MAVProxySetup-latest.exe")){
+if (!(Test-Path "$path\Installers\downloaded_cygwin_packages")){
+  New-Item -Path $path\Installers -Name "downloaded_cygwin_packages" -ItemType "directory"
   Write-Output "Starting Downloads, WARNING: PLEASE DONT CANCEL!"
 
   Write-Output "Downloading MAVProxy (1/7)"
@@ -112,25 +113,24 @@ git submodule update --init --recursive
 Read-Host "Continue to Open Simulator?"
 Write-Host "Please open cygwin terminal..."
 $drive = Read-Host "$path in C or D or E disk?, or Write The Name of disk"
-$firstNF_path = $path.replace('\', '/')
-$secondNF_path = $path.replace('C:/', '')
+$firstNF_path = "$path".Replace('\', '/')
+$secondNF_path = "$firstNF_path".Replace('C:/', '')
 Write-Host "----------------------------------------------"
 Write-Host "Please Run This:"
 Write-Host " "
-Write-Host "cd /cygdrive/"+$drive.ToLower()+"/"+$secondNF_path+"/ardupilot"
+Write-Host "cd /cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot"
 Write-Host "----------------------------------------------"
 Write-Host "Then Run This:"
 Write-Host " "
-Write-Host "./Tools/autotest/sim_vehicle.py --map --console"
+Write-Host "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
 
-Read-Host "Continue With Ground Station?"
-cd ..
-cd missionplanner
-.\"MissionPlanner.exe"
-
-Read-Host "Please Connect Ground Station With SITL and Continue"
-
-Read-Host "Continue and Open Python Script?"
+Read-Host "Continue and Open Python Script with VSCODE?"
 cd ..
 cd Scripts
 code .
+
+Read-Host "Continue With Ground Station?"
+Read-Host "Please Connect Ground Station With SITL when Mission Planner is Opened."
+cd ..
+cd missionplanner
+.\"MissionPlanner.exe"
