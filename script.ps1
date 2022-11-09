@@ -33,8 +33,9 @@ if($have_vstudio -eq 0){
 }
 
 if (!(Test-Path "$path\Installers\MissionPlanner-latest.msi")){
+  Write-Host "Dwonloading Mission Planner Setup....."
   New-Item -Path $path -Name "missionplanner" -ItemType "directory"
-  Write-Host "Please Download It Under $path/missionplanner/"
+  Write-Host "Please Download Mission Planner Under $path/missionplanner/ in Setup Settings"
   Invoke-WebRequest "https://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi" -OutFile "$path\Installers\MissionPlanner-latest.msi"
   .\"MissionPlanner-latest.msi"
 }
