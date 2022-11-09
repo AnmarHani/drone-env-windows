@@ -46,6 +46,9 @@ if (!(Test-Path "$path\Installers\python-3.11.0-amd64.exe")){
 }
 
 pip install "./lxml-4.9.0-cp311-cp311-win_amd64.whl"
+pip install lxml
+pip install pexpect
+pip install pymavlink
 
 cd ..
 cd Scripts
