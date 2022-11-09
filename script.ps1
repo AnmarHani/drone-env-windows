@@ -28,7 +28,7 @@ if($have_vstudio -eq 1){
 if($have_vstudio -eq 0){
   Write-Host "Download It From Here:"
   Write-Host "https://visualstudio.microsoft.com/downloads/"
-  Write-Host "Please Rerun This File And Choose Yes"
+  Read-Host "Please Rerun This File And Choose Yes"
   Exit
 }
 
