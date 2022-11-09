@@ -110,9 +110,17 @@ cd ardupilot
 git submodule update --init --recursive
 
 Read-Host "Continue to Open Simulator?"
-Write-Host "Please open cygwin terminal and write:"
+Write-Host "Please open cygwin terminal..."
 $drive = Read-Host "$path in C or D or E disk?, or Write The Name of disk"
-Write-Host "cd /cygdrive/$drive/$env:UserName/$path/ardupilot"
+$firstNF_path = $path.replace('\', '/')
+$secondNF_path = $path.replace('C:/', '')
+Write-Host "----------------------------------------------"
+Write-Host "Please Run This:"
+Write-Host " "
+Write-Host "cd /cygdrive/"+$drive.ToLower()+"/"+$secondNF_path+"/ardupilot"
+Write-Host "----------------------------------------------"
+Write-Host "Then Run This:"
+Write-Host " "
 Write-Host "./Tools/autotest/sim_vehicle.py --map --console"
 
 Read-Host "Continue With Ground Station?"
