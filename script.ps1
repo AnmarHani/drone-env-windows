@@ -1,7 +1,3 @@
-# todo
-#download needed python packages
-#download pymavlink or whatever
-
 $path = Get-Location
 $downloads_counter = 0
 
@@ -20,12 +16,6 @@ if($have_vstudio -eq 0){
   Read-Host "Continue?"
 }
 
-cd Scripts
-pip freeze > requirements.txt
-pip install -r pre-requirements.txt
-pip install -r requirements.txt
-
-cd ..
 
 cd Installers
 $have_vstudio = Read-Host "Do u have visual studio community? 0 for no, 1 for yes"
@@ -54,6 +44,19 @@ if (!(Test-Path "$path\Installers\python-3.11.0-amd64.exe")){
   .\"python-3.11.0-amd64.exe"
   $downloads_counter++
 }
+
+cd ..
+
+pip install "./lxml-4.9.0-cp311-cp311-win_amd64.whl"
+
+cd Scripts
+pip freeze > requirements.txt
+pip install -r pre-requirements.txt
+pip install -r requirements.txt
+
+cd ..
+cd Installers
+
 if (!(Test-Path "$path\Installers\Git-2.38.1-64-bit.exe")){
   Invoke-WebRequest "https://github.com/git-for-windows/git/releases/download/v2.38.1.windows.1/Git-2.38.1-64-bit.exe" -OutFile "$path\Installers\Git-2.38.1-64-bit.exe"
   .\"Git-2.38.1-64-bit.exe"
