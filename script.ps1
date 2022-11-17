@@ -5,34 +5,29 @@ if (!(Test-Path "$path\Installers")){
   New-Item -Path $path -Name "Installers" -ItemType "directory"
 }
 
-if (!(Test-Path "$path\ardupilot")){
-  Write-Host "Downloading Ardupilot...."
-  git clone https://github.com/ArduPilot/ardupilot.git
-}
-
-$have_vscode = Read-Host "Do u have vscode? 0 for no, Enter To Skip.."
-if($have_vstudio -eq 0){
+$have_vscode = Read-Host "Do u have vscode? 0 for no 1 for yes, Enter To Skip.."
+if($have_vscode -eq 0){
   Write-Host "Download It From Here:"
   Write-Host "https://code.visualstudio.com/download#"
   Read-Host "Continue?"
 }
 
-
 cd Installers
-$have_vstudio = Read-Host "Do u have visual studio community? 0 for no, 1 for yes, Enter To Skip.."
 
-if($have_vstudio -eq 1){
+if(!(Test-Path "$path\Installers\have_vstudio")){
+  Write-Host "Downloading Visual Stduio Code Setup....."
+  New-Item -Path $path -Name "have_vstudio" -ItemType "directory"
   Write-Host "Please Download C++ Build Tools"
   Write-Host "Opening Installer..."
   Invoke-WebRequest "https://aka.ms/vs/17/release/vs_BuildTools.exe" -OutFile "$path\Installers\vs_BuildTools.exe"
   .\"vs_BuildTools.exe"
 }
-if($have_vstudio -eq 0){
-  Write-Host "Download It From Here:"
-  Write-Host "https://visualstudio.microsoft.com/downloads/"
-  Read-Host "Please Rerun This File And Choose Yes"
-  Exit
-}
+# if($have_vstudio -eq 0){
+#   Write-Host "Download It From Here:"
+#   Write-Host "https://visualstudio.microsoft.com/downloads/"
+#   Read-Host "Please Rerun This File And Choose Yes"
+#   Exit
+# }
 
 if (!(Test-Path "$path\Installers\MissionPlanner-latest.msi")){
   Write-Host "Dwonloading Mission Planner Setup....."
@@ -46,6 +41,7 @@ if (!(Test-Path "$path\Installers\python-3.11.0-amd64.exe")){
   Invoke-WebRequest "https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe" -OutFile "$path\Installers\python-3.11.0-amd64.exe"
   .\"python-3.11.0-amd64.exe"
   $downloads_counter++
+  Read-Host "If Finished Python Installation Please Enter.."
 }
 Write-Host "Downloading Python Packages...."
 pip install "./lxml-4.9.0-cp311-cp311-win_amd64.whl"
@@ -72,6 +68,11 @@ if (!(Test-Path "$path\Installers\Git-2.38.1-64-bit.exe")){
 if($downloads_counter -eq 2){
   Read-Host "Your Computer Will Be Restarted, Press Enter, or Cancel with exiting terminal"
   Restart-Computer
+}
+
+if (!(Test-Path "$path\ardupilot")){
+  Write-Host "Downloading Ardupilot...."
+  git clone https://github.com/ArduPilot/ardupilot.git
 }
 
 if (!(Test-Path "$path\Installers\downloaded_cygwin_packages")){
@@ -123,11 +124,14 @@ Write-Host "----------------------------------------------"
 Write-Host "Then Run This:"
 Write-Host " "
 Write-Host "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
-
-Read-Host "Continue and Open Python Script with VSCODE?"
-cd ..
-cd Scripts
-code .
+Write-Host "Please Dont Close This Terminal."
+Read-Host "Will Open A Cygwin Terminal OK?"
+Start-Process powershell ".\cygwin-script.ps1", "$($drive.ToUpper())"
+if($have_vscode -eq 1){
+  cd ..
+  cd Scripts
+  code .
+}
 
 Read-Host "Continue With Ground Station?"
 Read-Host "Please Connect Ground Station With SITL when Mission Planner is Opened."
