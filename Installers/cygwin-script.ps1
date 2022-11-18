@@ -1,4 +1,4 @@
-$command0 = "cd $($args[0]):\"
+$command0 = "cd C:\"
 $command1 = "cygwin64\bin\bash.exe"
 
 Write-Host "----------------------------------------------"
