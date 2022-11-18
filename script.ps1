@@ -116,7 +116,7 @@ Read-Host "Continue to Open Simulator?"
 Write-Host "Please open cygwin terminal..."
 $drive = Read-Host "$path in C or D or E disk?, or Write The Name of disk"
 $firstNF_path = "$path".Replace('\', '/')
-$secondNF_path = "$firstNF_path".Replace('C:/', '')
+$secondNF_path = "$firstNF_path".Replace("$($drive.ToUpper()):/", '')
 Write-Host "----------------------------------------------"
 Write-Host "Please Run This:"
 Write-Host " "
