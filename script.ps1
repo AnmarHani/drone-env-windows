@@ -16,7 +16,7 @@ cd Installers
 
 if(!(Test-Path "$path\Installers\have_vstudio")){
   Write-Host "Downloading Visual Stduio Code Setup....."
-  New-Item -Path $path -Name "have_vstudio" -ItemType "directory"
+  New-Item -Path "$path\Installers" -Name "have_vstudio" -ItemType "directory"
   Write-Host "Please Download C++ Build Tools"
   Write-Host "Opening Installer..."
   Invoke-WebRequest "https://aka.ms/vs/17/release/vs_BuildTools.exe" -OutFile "$path\Installers\vs_BuildTools.exe"
