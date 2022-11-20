@@ -127,7 +127,7 @@ Write-Host " "
 Write-Host "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
 Write-Host "Please Dont Close This Terminal."
 Read-Host "Will Open A Cygwin Terminal OK?"
-Start-Process powershell ".\Installers\cygwin-script.ps1", "$($drive.ToUpper())", "/cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot", "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
+Start-Process powershell "..\Installers\cygwin-script.ps1", "$($drive.ToUpper())", "/cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot", "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
 if($have_vscode -eq 1){
   cd ..
   cd Scripts
