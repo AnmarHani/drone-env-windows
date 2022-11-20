@@ -12,3 +12,4 @@ Write-Host "$($args[2])"
 
 Invoke-Expression $command0
 Invoke-Expression $command1
+Read-Host
