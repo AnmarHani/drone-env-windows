@@ -11,7 +11,7 @@ Write-Host "cd $($args[1])"
 Write-Host "----------------------------------------------"
 Write-Host "Then Run This:"
 Write-Host " "
-Write-Host "$($args[2])"
+Write-Host "$($args[2]) -v ArduCopter --map --console"
 
 Invoke-Expression $command0
 Invoke-Expression $command1
