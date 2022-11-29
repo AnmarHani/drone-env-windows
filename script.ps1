@@ -74,8 +74,9 @@ if (!(Test-Path "$path\ardupilot")){
   cd ..
   Write-Host "Downloading Ardupilot...."
   git clone https://github.com/ArduPilot/ardupilot.git
+  cd Installers
 }
-cd Installers
+
 if (!(Test-Path "$path\Installers\downloaded_cygwin_packages")){
   New-Item -Path $path\Installers -Name "downloaded_cygwin_packages" -ItemType "directory"
   Write-Output "Starting Downloads, WARNING: PLEASE DONT CANCEL!"
