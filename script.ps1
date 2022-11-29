@@ -118,17 +118,17 @@ Write-Host "Please open cygwin terminal..."
 $drive = Read-Host "$path in C or D or E disk?, or Write The Name of disk"
 $firstNF_path = "$path".Replace('\', '/')
 $secondNF_path = "$firstNF_path".Replace("$($drive.ToUpper()):/", '')
-Write-Host "----------------------------------------------"
-Write-Host "Please Run This:"
-Write-Host " "
-Write-Host "cd /cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot"
-Write-Host "----------------------------------------------"
-Write-Host "Then Run This:"
-Write-Host " "
-Write-Host "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
+# Write-Host "----------------------------------------------"
+# Write-Host "Please Run This:"
+# Write-Host " "
+# Write-Host "cd /cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot"
+# Write-Host "----------------------------------------------"
+# Write-Host "Then Run This:"
+# Write-Host " "
+# Write-Host "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
 Write-Host "Please Dont Close This Terminal."
 Read-Host "Will Open A Cygwin Terminal OK?"
-Start-Process powershell "..\Installers\cygwin-script.ps1", "$($drive.ToUpper())", "/cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot", "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
+Start-Process powershell "..\Installers\cygwin-script.ps1", "$($drive.ToUpper())", "/cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot", "./Tools/autotest/sim_vehicle.py"
 if($have_vscode -eq 1){
   cd ..
   cd Scripts
