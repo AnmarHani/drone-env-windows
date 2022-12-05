@@ -56,6 +56,8 @@ pip install -r pre-requirements.txt
 pip install -r requirements.txt
 
 cd ..
+pip install -r ./dunes_aero_system/requirements.txt
+
 cd Installers
 
 if (!(Test-Path "$path\Installers\Git-2.38.1-64-bit.exe")){
