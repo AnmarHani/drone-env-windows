@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 ./dunes_aero_system/ground_station/main_system/main.py
