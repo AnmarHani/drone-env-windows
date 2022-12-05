@@ -5,12 +5,12 @@ if (!(Test-Path "$path\Installers")){
   New-Item -Path $path -Name "Installers" -ItemType "directory"
 }
 
-$have_vscode = Read-Host "Do u have vscode? 0 for no 1 for yes, Enter To Skip.."
-if($have_vscode -eq 0){
-  Write-Host "Download It From Here:"
-  Write-Host "https://code.visualstudio.com/download#"
-  Read-Host "Continue?"
-}
+# $have_vscode = Read-Host "Do u have vscode? 0 for no 1 for yes, Enter To Skip.."
+# if($have_vscode -eq 0){
+#   Write-Host "Download It From Here:"
+#   Write-Host "https://code.visualstudio.com/download#"
+#   Read-Host "Continue?"
+# }
 
 cd Installers
 
@@ -127,13 +127,13 @@ $secondNF_path = "$firstNF_path".Replace("$($drive.ToUpper()):/", '')
 # Write-Host " "
 # Write-Host "./Tools/autotest/sim_vehicle.py -v ArduCopter --map --console"
 Write-Host "Please Dont Close This Terminal."
-Read-Host "Will Open A Cygwin Terminal OK?"
+Read-Host "Will Try To Open A Cygwin Terminal OK?"
 Start-Process powershell "..\Installers\cygwin-script.ps1", "$($drive.ToUpper())", "/cygdrive/$($drive.ToLower())/$secondNF_path/ardupilot", "./Tools/autotest/sim_vehicle.py"
-if($have_vscode -eq 1){
-  cd ..
-  cd Scripts
-  code .
-}
+# if($have_vscode -eq 1){
+#   cd ..
+#   cd Scripts
+#   code .
+# }
 
 Read-Host "Continue With Ground Station?"
 Read-Host "Please Connect Ground Station With SITL when Mission Planner is Opened."
